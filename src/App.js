@@ -24,6 +24,10 @@ function App() {
         body: JSON.stringify({ message: input, userName }),
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
       const data = await response.json();
       const botMessage = { text: data.reply, sender: 'bot' };
       setMessages((prevMessages) => [...prevMessages, botMessage]);
